@@ -49,7 +49,6 @@ class BeerClientImplTest {
                 .build();
 
 
-
         BeerDTO beerDTO = beerClient.createBeer(newDtp);
         beerClient.deleteBeer(beerDTO.getId());
 
