@@ -48,6 +48,7 @@ class BeerClientImplTest {
                 .upc("123245")
                 .build();
 
+
         BeerDTO beerDTO = beerClient.createBeer(newDtp);
         beerClient.deleteBeer(beerDTO.getId());
 
