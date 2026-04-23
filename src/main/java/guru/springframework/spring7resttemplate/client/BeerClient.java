@@ -10,7 +10,7 @@ public interface BeerClient {
     Page<BeerDTO> listBeers();
     Page<BeerDTO> listBeers(String beerName, BeerStyle beerStyle, Boolean showInventory, Integer pageNumber, Integer pageSize);
 
-    BeerDTO getBeerById(UUID id);
+    BeerDTO getBeerById(UUID beerId);
 
     BeerDTO createBeer(BeerDTO newDtp);
 

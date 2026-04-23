@@ -8,6 +8,7 @@ import org.springframework.boot.restclient.RestTemplateBuilder;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -21,8 +22,8 @@ public class BeerClientImpl implements BeerClient {
     private final RestTemplateBuilder restTemplateBuilder;
 
 //    private final static String BASE_URL = "http://localhost:8080/";
-    private final static String GET_BEER_URL = "api/v1/beer";
-    private final static String GET_BEER_BY_ID_PATH = "/api/v1/beer/{beerId}";
+    public final static String GET_BEER_URL = "api/v1/beer";
+    public final static String GET_BEER_BY_ID_PATH = "/api/v1/beer/{beerId}";
 
     @Override
     public Page<BeerDTO> listBeers() {
@@ -54,9 +55,9 @@ public class BeerClientImpl implements BeerClient {
     }
 
     @Override
-    public BeerDTO getBeerById(UUID id) {
+    public BeerDTO getBeerById(@PathVariable("beerId") UUID beerId) {
         RestTemplate restTemplate = restTemplateBuilder.build();
-        return restTemplate.getForObject(GET_BEER_BY_ID_PATH, BeerDTO.class, id);
+        return restTemplate.getForObject(GET_BEER_BY_ID_PATH, BeerDTO.class, beerId);
     }
 
     @Override
