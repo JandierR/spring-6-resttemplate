@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.client.*;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.web.util.DefaultUriBuilderFactory;
+import org.zalando.logbook.Logbook;
+import org.zalando.logbook.spring.LogbookClientHttpRequestInterceptor;
 
 @Configuration
 public class RestTemplateBuilderConfig {
@@ -37,8 +39,11 @@ public class RestTemplateBuilderConfig {
 
         assert rootUrl != null;
 
+        LogbookClientHttpRequestInterceptor logbookClientHttpRequestInterceptor =
+                new LogbookClientHttpRequestInterceptor(Logbook.builder().build());
+
         return configurer.configure(new RestTemplateBuilder())
-                .additionalInterceptors(interceptor)
+                .additionalInterceptors(interceptor, logbookClientHttpRequestInterceptor)
                 .uriTemplateHandler(new DefaultUriBuilderFactory(rootUrl));
     }
 
